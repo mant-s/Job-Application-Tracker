@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Done, Clear, Delete, Edit } from "@mui/icons-material";
 
 function JobApplications(props) {
   const [isEditing, setIsEditing] = useState(false);
@@ -40,9 +41,7 @@ function JobApplications(props) {
     setIsEditing(false);
   }
 
-  // console.log(props.dateApplied);
   const applicationDate = new Date(props.dateApplied);
-  // console.log(applicationDate);
 
   var day = applicationDate.getDate();
   var month = applicationDate.getMonth() + 1;
@@ -178,7 +177,7 @@ function JobApplications(props) {
           props.deleteApplication(e, application, props.id);
         }}
       >
-        DELETE
+        <Delete />
       </button>
       <button
         hidden={isEditing}
@@ -186,7 +185,7 @@ function JobApplications(props) {
           setIsEditing(true);
         }}
       >
-        EDIT
+        <Edit />
       </button>
       <button
         hidden={!isEditing}
@@ -194,68 +193,13 @@ function JobApplications(props) {
           setIsEditing(false);
         }}
       >
-        CANCEL
+        <Clear />
       </button>
       <button hidden={!isEditing} onClick={(e) => handleSubmit(e)}>
-        CONFIRM
+        <Done />
       </button>
     </div>
   );
 }
-
-// function JobApplications(props) {
-//   const [isEditing, setIsEditing] = useState(false);
-
-//   // console.log(props.dateApplied);
-//   const applicationDate = new Date(props.dateApplied);
-//   // console.log(applicationDate);
-
-//   var day = applicationDate.getDate();
-//   var month = applicationDate.getMonth() + 1;
-//   var year = applicationDate.getFullYear();
-
-//   const application = {
-//     company: props.company,
-//     jobTitle: props.jobTitle,
-//     dateApplied: props.dateApplied,
-//     jobDescription: props.jobDescription,
-//     replied: props.replied,
-//     interviewRound: props.interviewRound,
-//     rejected: props.rejected,
-//     accepted: props.accepted,
-//   };
-
-//   return (
-//     <div className="application">
-//       <h1>{props.company}</h1>
-//       <h1>{props.jobTitle}</h1>
-//       <p>{`Application Date:\n${day}/${month}/${year}`}</p>
-//       <p>{`Job Description:\n${props.jobDescription}`}</p>
-//       <p>{props.replied ? "Replied: Yes" : "Replied: No"}</p>
-//       <p>{`Interview Round: ${props.interviewRound}`}</p>
-//       <p>{props.rejected ? "Rejected: Yes" : "Rejected: No"}</p>
-//       <p>{props.accepted ? "Accepted: Yes" : "Accepted: No"}</p>
-//       <button
-//         type="submit"
-//         hidden={isEditing}
-//         onClick={(e) => {
-//           props.deleteApplication(e, application, props.id);
-//         }}
-//       >
-//         DELETE
-//       </button>
-//       <button
-//         hidden={isEditing}
-//         onClick={() => {
-//           setIsEditing(true);
-//         }}
-//       >
-//         EDIT
-//       </button>
-//       <button hidden={!isEditing}>CANCEL</button>
-//       <button hidden={!isEditing}>CONFIRM</button>
-//     </div>
-//   );
-// }
 
 export default JobApplications;

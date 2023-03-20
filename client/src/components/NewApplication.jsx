@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AddIcon from "@mui/icons-material/Add";
 
 function NewApplication(props) {
   const [application, setApplication] = useState({
@@ -110,7 +111,7 @@ function NewApplication(props) {
             props.applicationHandler(e, application);
           }}
         >
-          Add
+          <AddIcon />
         </button>
       </form>
     </div>

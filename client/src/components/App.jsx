@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
+
 import Header from "./Header";
 import Footer from "./Footer";
 import NewApplication from "./NewApplication";
@@ -13,7 +14,6 @@ function App() {
     axios
       .get("/api/job-applications")
       .then((res) => {
-        // console.log(res.data);
         setApplications(res.data);
       })
       .catch((err) => {
@@ -43,9 +43,6 @@ function App() {
         return id !== ind;
       });
     });
-
-    // Checking if application is coming through accurately
-    // console.log(application);
 
     axios
       .delete("/api/delete-job-application", { data: { application } })
@@ -103,6 +100,7 @@ function App() {
               accepted={application.accepted}
               deleteApplication={deleteApplication}
               updateApplication={updateApplication}
+              value={`JobApplication ${ind}`}
             />
           );
         })}
