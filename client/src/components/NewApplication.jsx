@@ -5,7 +5,7 @@ function NewApplication(props) {
   const [application, setApplication] = useState({
     company: "",
     jobTitle: "",
-    dateApplied: "new Date()",
+    dateApplied: new Date(),
     jobDescription: "",
     replied: false,
     interviewRound: 0,

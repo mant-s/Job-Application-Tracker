@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Done, Clear, Delete, Edit } from "@mui/icons-material";
 
 function JobApplications(props) {
+  const [isExpanded, setIsExpanded] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [company, setCompany] = useState(props.company);
   const [jobTitle, setJobTitle] = useState(props.jobTitle);
@@ -89,87 +90,111 @@ function JobApplications(props) {
         )}
       </h1>
       <p>{`Application Date: ${day}/${month}/${year}`}</p>
-      <p>
-        {isEditing ? (
-          <>
-            <label htmlFor="jobDescription">Job description</label>
-            <textarea
-              value={jobDescription}
-              onChange={(e) => setJobDescription(e.target.value)}
-            />
-          </>
-        ) : (
-          `Job Description:\n${props.jobDescription}`
-        )}
-      </p>
-      <p>
-        {isEditing ? (
-          <>
-            <input
-              type="checkbox"
-              checked={replied}
-              onChange={(e) => setReplied(e.target.checked)}
-            />{" "}
-            <label htmlFor="replied" className="checkboxes">
-              Replied
-            </label>
-          </>
-        ) : props.replied ? (
-          "Replied: Yes"
-        ) : (
-          "Replied: No"
-        )}
-      </p>
-      <p>
-        {isEditing ? (
-          <>
-            <label htmlFor="interviewRound">Interview round</label>
-            <input
-              type="number"
-              value={interviewRound}
-              onChange={(e) => setInterviewRound(e.target.value)}
-            />
-          </>
-        ) : (
-          `Interview Round: ${props.interviewRound}`
-        )}
-      </p>
-      <p>
-        {isEditing ? (
-          <>
-            <input
-              type="checkbox"
-              checked={rejected}
-              onChange={(e) => setRejected(e.target.checked)}
-            />{" "}
-            <label htmlFor="rejected" className="checkboxes">
-              Rejected
-            </label>
-          </>
-        ) : props.rejected ? (
-          "Rejected: Yes"
-        ) : (
-          "Rejected: No"
-        )}
-      </p>
-      <p>
-        {isEditing ? (
-          <>
-            <input
-              type="checkbox"
-              checked={accepted}
-              onChange={(e) => setAccepted(e.target.checked)}
-            />{" "}
-            <label htmlFor="accepted" className="checkboxes">
-              Accepted
-            </label>
-          </>
-        ) : props.accepted ? (
-          "Accepted: Yes"
-        ) : (
-          "Accepted: No"
-        )}
-      </p>
+      <button
+        className="expanded-button"
+        hidden={isExpanded}
+        onClick={(e) => {
+          setIsExpanded(true);
+        }}
+      >
+        Read More
+      </button>
+      {isExpanded && (
+        <>
+          <p>
+            {isEditing ? (
+              <>
+                <label htmlFor="jobDescription">Job description</label>
+                <textarea
+                  value={jobDescription}
+                  onChange={(e) => setJobDescription(e.target.value)}
+                />
+              </>
+            ) : (
+              `Job Description:\n${props.jobDescription}`
+            )}
+          </p>
+
+          <p>
+            {isEditing ? (
+              <>
+                <input
+                  type="checkbox"
+                  checked={replied}
+                  onChange={(e) => setReplied(e.target.checked)}
+                />{" "}
+                <label htmlFor="replied" className="checkboxes">
+                  Replied
+                </label>
+              </>
+            ) : props.replied ? (
+              "Replied: Yes"
+            ) : (
+              "Replied: No"
+            )}
+          </p>
+          <p>
+            {isEditing ? (
+              <>
+                <label htmlFor="interviewRound">Interview round</label>
+                <input
+                  type="number"
+                  value={interviewRound}
+                  onChange={(e) => setInterviewRound(e.target.value)}
+                />
+              </>
+            ) : (
+              `Interview Round: ${props.interviewRound}`
+            )}
+          </p>
+          <p>
+            {isEditing ? (
+              <>
+                <input
+                  type="checkbox"
+                  checked={rejected}
+                  onChange={(e) => setRejected(e.target.checked)}
+                />{" "}
+                <label htmlFor="rejected" className="checkboxes">
+                  Rejected
+                </label>
+              </>
+            ) : props.rejected ? (
+              "Rejected: Yes"
+            ) : (
+              "Rejected: No"
+            )}
+          </p>
+          <p>
+            {isEditing ? (
+              <>
+                <input
+                  type="checkbox"
+                  checked={accepted}
+                  onChange={(e) => setAccepted(e.target.checked)}
+                />{" "}
+                <label htmlFor="accepted" className="checkboxes">
+                  Accepted
+                </label>
+              </>
+            ) : props.accepted ? (
+              "Accepted: Yes"
+            ) : (
+              "Accepted: No"
+            )}
+          </p>
+        </>
+      )}
+      <button
+        className="expanded-button"
+        hidden={!isExpanded}
+        onClick={(e) => {
+          e.preventDefault();
+          setIsExpanded(false);
+        }}
+      >
+        Read Less
+      </button>
       <button
         type="submit"
         hidden={isEditing}
@@ -182,6 +207,7 @@ function JobApplications(props) {
       <button
         hidden={isEditing}
         onClick={() => {
+          setIsExpanded(true);
           setIsEditing(true);
         }}
       >

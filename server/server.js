@@ -3,14 +3,12 @@ const express = require("express");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const path = require("path");
-// const cors = require("cors");
 const app = express();
 
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
-// app.use(cors());
 
 mongoose.set("strictQuery", false);
 const mongoUri = process.env.MONGO_URI;
@@ -41,14 +39,6 @@ const jobApplicationsSchema = new mongoose.Schema({
 // Compiling Schema into a model
 const JobApplication = mongoose.model("JobApplication", jobApplicationsSchema);
 
-// Creating first example item
-// const dateToday = new Date();
-// console.log(dateToday);
-
-// JobApplication.deleteOne({ company: "Enter the company here" });
-
-// Saving the first example item
-
 // Creating Routes
 // Route for getting all values in db
 app.get("/api/job-applications", (req, res) => {
@@ -56,7 +46,6 @@ app.get("/api/job-applications", (req, res) => {
   JobApplication.find({}).then((docs) => {
     res.json(docs);
   });
-  // res.send("Hello World!");
 });
 
 // Route for adding applications to db
@@ -78,8 +67,6 @@ app.post("/api/new-job-application", (req, res) => {
     rejected: rejected,
     accepted: accepted,
   });
-
-  // console.log(jobApplication);
 
   // Saving application
   jobApplication.save();
