@@ -137,6 +137,15 @@ form button {
   margin: 16px;
   float: left;
 }
+
+.accepted {
+  border: 3px solid green;
+}
+
+.rejected {
+  background-color: grey;
+}
+
 .application h1 {
   font-size: 1.1em;
   margin-bottom: 6px;

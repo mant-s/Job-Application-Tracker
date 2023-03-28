@@ -143,6 +143,11 @@ app.put("/api/update-job-application", (req, res) => {
     });
 });
 
+// Authentication in development
+app.post("/api/auth/login", (req, res) => {
+  const { username, password } = req.body;
+});
+
 connectDB().then(() => {
   app.listen(PORT, function () {
     console.log(`Listening on port ${PORT}`);

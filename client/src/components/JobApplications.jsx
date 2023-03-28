@@ -60,7 +60,16 @@ function JobApplications(props) {
   };
 
   return (
-    <div className="application">
+    // <div className="application">
+    <div
+      className={
+        accepted
+          ? "application accepted"
+          : rejected
+          ? "application rejected"
+          : "application"
+      }
+    >
       <h1>
         {isEditing ? (
           <>
